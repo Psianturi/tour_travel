@@ -104,7 +104,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             ),
                           ),
                         ),
-                        VerticalDivider(
+                        const VerticalDivider(
                           color: Colors.white,
                           thickness: 1,
                         ),
@@ -124,7 +124,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             ),
                           ),
                         ),
-                        VerticalDivider(
+                        const VerticalDivider(
                           color: Colors.white,
                           thickness: 1,
                         ),
@@ -148,6 +148,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     ),
                   ),
                 ),
+
                 if (currentView == 'Detail Info')
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,8 +178,8 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                         margin: const EdgeInsets.only(top: 8, left: 20, right: 20),
                         child: const Text(
                           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                          ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
-                          'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                              ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
+                              'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black54,
@@ -197,33 +198,67 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 50, // Sesuaikan dengan tinggi yang Anda inginkan
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5, // Jumlah card yang ingin ditampilkan
+                          itemBuilder: (context, index) {
+                            return Card(
+                              color: Colors.blue,
+                              elevation: 15,
+                              margin: const EdgeInsets.only(left: 20),
+                              child: InkWell(
+                                onTap: () {
+
+                                 print('Card ke-$index diklik');
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.location_on_outlined), // Icon map
+                                      const SizedBox(width: 5), // Spasi antara ikon dan teks
+                                      Text(
+                                        'Buka Map $index',
+                                        style: TextStyle(
+                                          color: Colors.white, // Warna teks putih
+                                        ),
+                                      ), // Teks map
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 40),
                     ],
                   ),
 
                 if (currentView == 'Paket')
                   Column(
                     children: [
-                      SizedBox(height: 15.5),
+                      const SizedBox(height: 15.5),
                       Image.asset(
                         'assets/umroh_iklan.png',
                         width: 345,
                         height: 205,
                         fit: BoxFit.fitWidth,
                       ),
-                      Container(
-                        // margin: const EdgeInsets.only(top: 5),
-                        child: Image.asset(
-                          'assets/umroh_iklan.png',
-                          width: 345,
-                          height: 205,
-                          fit: BoxFit.fitWidth,
-                        ),
+                      Image.asset(
+                        'assets/umroh_iklan.png',
+                        width: 345,
+                        height: 205,
+                        fit: BoxFit.fitWidth,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 35),
                     ],
                   ),
                 if (currentView == 'Gambar')
-                  Text(
+                  const Text(
                     'Tampilkan Gambar di sini',
                     style: TextStyle(fontSize: 16),
                   ),
