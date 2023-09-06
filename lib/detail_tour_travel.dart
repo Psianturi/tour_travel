@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class DetailTourTravel extends StatelessWidget {
+class DetailTourTravel extends StatefulWidget {
   const DetailTourTravel({super.key});
+
+  @override
+  _DetailTourTravelState createState() => _DetailTourTravelState();
+}
+
+class _DetailTourTravelState extends State<DetailTourTravel> {
+  String currentView = 'Detail Info';
+
+  void changeView(String view) {
+    setState(() {
+      currentView = view;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +60,8 @@ class DetailTourTravel extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Column(
+          SingleChildScrollView(
+          child: Column(
             children: [
               Align(
                 alignment: Alignment.topCenter, // Menengahkan elemen-elemen ke atas tengah
@@ -64,117 +78,158 @@ class DetailTourTravel extends StatelessWidget {
               ),
 
               Container(
-              width: double.infinity, // Lebar kontainer mengikuti layar
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              margin: const EdgeInsets.only(top: 12),
-               child: const Card(
-                elevation: 5,
-                child: Row(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.only(top: 12),
+                child: Card(
+                  elevation: 5,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => changeView('Detail Info'),
+                          child: Center(
+                            child: Text(
+                              'Detail Info',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: currentView == 'Detail Info'
+                                    ? Colors.blueAccent
+                                    : Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      VerticalDivider(
+                        color: Colors.white,
+                        thickness: 1,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => changeView('Paket'),
+                          child: Center(
+                            child: Text(
+                              'Paket',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: currentView == 'Paket'
+                                    ? Colors.blueAccent
+                                    : Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      VerticalDivider(
+                        color: Colors.white,
+                        thickness: 1,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => changeView('Gambar'),
+                          child: Center(
+                            child: Text(
+                              'Gambar',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: currentView == 'Gambar'
+                                    ? Colors.blueAccent
+                                    : Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              if (currentView == 'Detail Info')
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          'Detail Info',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.blueAccent,
-                          ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 16, left: 30),
+                      child: const Text(
+                        'Tour Hajj Indo',
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
                         ),
                       ),
                     ),
-                    VerticalDivider(
-                      color: Colors.white, // Divider antara teks
-                      thickness: 1,
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          'Paket',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.blueAccent,
-                          ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 4, left: 30),
+                      child: const Text(
+                        '4.0',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
                         ),
                       ),
                     ),
-                    VerticalDivider(
-                      color: Colors.white, // Divider antara teks
-                      thickness: 1,
+                    Container(
+                      margin: const EdgeInsets.only(top: 8, left: 30),
+                      child: const Text(
+                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                            ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
+                            'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                        ),
+                      ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          'Gambar',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.blueAccent,
-                          ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10, left: 30),
+                      child: const Text(
+                        'Fasilitas',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ),
 
-              Align(
-                alignment: Alignment.centerLeft, // Meletakkan teks di sebelah kiri
-                child: Container(
-                  margin: const EdgeInsets.only(top: 16, left: 30), // Sesuaikan margin sesuai kebutuhan
-                  child: const Text(
-                    'Tour Hajj Indo',
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
+              if (currentView == 'Paket')
+                Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Image.asset(
+                      'assets/umroh_iklan.png',
+                      width: 380, // Sesuaikan dengan ukuran yang Anda inginkan
+                      height: 220, // Sesuaikan dengan ukuran yang Anda inginkan,
+                      fit: BoxFit.fitWidth,
                     ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft, // Meletakkan teks di sebelah kiri
-                child: Container(
-                  margin: const EdgeInsets.only(top: 4, left: 30), // Sesuaikan margin sesuai kebutuhan
-                  child: const Text(
-                    '4.0',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
+                    Container(
+                      margin: const EdgeInsets.only(top: 5), // Ubah jarak antara gambar pertama dan kedua sesuai kebutuhan
+                      child: Image.asset(
+                        'assets/umroh_iklan.png',
+                        width: 380, // Sesuaikan dengan ukuran yang Anda inginkan
+                        height: 220, // Sesuaikan dengan ukuran yang Anda inginkan
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 40),
+                  ],
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft, // Meletakkan teks di sebelah kiri
-                child: Container(
-                  margin: const EdgeInsets.only(top: 8, left: 30), // Sesuaikan margin sesuai kebutuhan
-                  child: const Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                        ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
-                    'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
+
+
+              if (currentView == 'Gambar')
+                Text(
+                  'Tampilkan Gambar di sini',
+                  style: TextStyle(fontSize: 16),
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft, // Meletakkan teks di sebelah kiri
-                child: Container(
-                  margin: const EdgeInsets.only(top: 10, left: 30), // Sesuaikan margin sesuai kebutuhan
-                  child: const Text(
-                    'Fasilitas',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+
             ],
           ),
+    ),
         ],
       ),
     );

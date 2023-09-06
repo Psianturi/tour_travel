@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 position: index,
                 duration: const Duration(milliseconds: 370),
                 child: SlideAnimation(
-                  verticalOffset: 70.0,
+                  verticalOffset: 65.0,
                   child: FadeInAnimation(
                     child: Card(
                       color: Colors.white,
@@ -134,8 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         description: const Text('Lorem Ipsum bla bla . .'),
                         icon: Image.asset(
                           'assets/map_ic.png', // Ganti dengan path ke gambar ikon favorit di asset Anda
-                          width: 80, // Sesuaikan dengan lebar yang Anda inginkan
-                          height: 90, // Sesuaikan dengan tinggi yang Anda inginkan
+                          width: 80,
+                          height: 85,
+                          fit: BoxFit.cover, // Sesuaikan dengan kebutuhan Anda
                         ),
 
                         onTap: () {
