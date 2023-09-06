@@ -116,21 +116,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           height: 85,
                         ),
                         titleText: 'Tour Hajj Indo',
-                        subTitle: Row(
-                          children: [
-                            Text('${index + 1}'),
-                            Row(
-                              children: List.generate(5, (i) {
-                                return Icon(
-                                  i < (index + 1)
-                                      ? Icons.star
-                                      : Icons.star_border,
-                                  color: Colors.orangeAccent,
-                                );
-                              }),
-                            ),
-                          ],
-                        ),
+                        subTitle: const Text('Haji', style: TextStyle(color: Colors.lightBlueAccent),),
+                        // subTitle: Row(
+                        //   children: [
+                        //     Text('${index + 1}'),
+                        //     Row(
+                        //       children: List.generate(5, (i) {
+                        //         return Icon(
+                        //           i < (index + 1)
+                        //               ? Icons.star
+                        //               : Icons.star_border,
+                        //           color: Colors.orangeAccent,
+                        //         );
+                        //       }),
+                        //     ),
+                        //   ],
+                        // ),
                         description: const Text('Lorem Ipsum bla bla . .'),
                         icon: Image.asset(
                           'assets/map_ic.png', // Ganti dengan path ke gambar ikon favorit di asset Anda

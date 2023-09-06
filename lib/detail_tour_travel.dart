@@ -61,175 +61,175 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
             ),
           ),
           SingleChildScrollView(
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topCenter, // Menengahkan elemen-elemen ke atas tengah
-                child: Container(
-                  margin: const EdgeInsets.only(top: 14),
-                  // padding: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'assets/hajjumrah.png',
-                    width: 390,
-                    height: 220,
-                    fit: BoxFit.cover,
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  // Menengahkan elemen-elemen ke atas tengah
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 14),
+                    padding: const EdgeInsets.all(4.4),
+                    child: Image.asset(
+                      'assets/hajjumrah.png',
+                      width: 360,
+                      height: 220,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                margin: const EdgeInsets.only(top: 12),
-                child: Card(
-                  elevation: 5,
-                  child: Row(
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 13.5),
+                  // Ubah ukuran
+                  margin: const EdgeInsets.only(top: 12),
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 5,
+                    shadowColor: Colors.white70,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => changeView('Detail Info'),
+                            child: Center(
+                              child: Text(
+                                'Detail Info',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: currentView == 'Detail Info'
+                                      ? Colors.blueAccent
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Colors.white,
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => changeView('Paket'),
+                            child: Center(
+                              child: Text(
+                                'Paket',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: currentView == 'Paket'
+                                      ? Colors.blueAccent
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Colors.white,
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => changeView('Gambar'),
+                            child: Center(
+                              child: Text(
+                                'Gambar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: currentView == 'Gambar'
+                                      ? Colors.blueAccent
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (currentView == 'Detail Info')
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => changeView('Detail Info'),
-                          child: Center(
-                            child: Text(
-                              'Detail Info',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: currentView == 'Detail Info'
-                                    ? Colors.blueAccent
-                                    : Colors.black54,
-                              ),
-                            ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15, left: 20),
+                        child: const Text(
+                          'Tour Hajj Indo',
+                          style: TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueAccent,
                           ),
                         ),
                       ),
-                      VerticalDivider(
-                        color: Colors.white,
-                        thickness: 1,
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => changeView('Paket'),
-                          child: Center(
-                            child: Text(
-                              'Paket',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: currentView == 'Paket'
-                                    ? Colors.blueAccent
-                                    : Colors.black54,
-                              ),
-                            ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 4, left: 20),
+                        child: const Text(
+                          '4.0',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
                           ),
                         ),
                       ),
-                      VerticalDivider(
-                        color: Colors.white,
-                        thickness: 1,
+                      Container(
+                        margin: const EdgeInsets.only(top: 8, left: 20, right: 20),
+                        child: const Text(
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                          ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
+                          'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => changeView('Gambar'),
-                          child: Center(
-                            child: Text(
-                              'Gambar',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: currentView == 'Gambar'
-                                    ? Colors.blueAccent
-                                    : Colors.black54,
-                              ),
-                            ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10, left: 20),
+                        child: const Text(
+                          'Fasilitas',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
 
-              if (currentView == 'Detail Info')
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 16, left: 30),
-                      child: const Text(
-                        'Tour Hajj Indo',
-                        style: TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 4, left: 30),
-                      child: const Text(
-                        '4.0',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 8, left: 30),
-                      child: const Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                            ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
-                            'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10, left: 30),
-                      child: const Text(
-                        'Fasilitas',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-              if (currentView == 'Paket')
-                Column(
-                  children: [
-                    SizedBox(height: 10),
-                    Image.asset(
-                      'assets/umroh_iklan.png',
-                      width: 380, // Sesuaikan dengan ukuran yang Anda inginkan
-                      height: 220, // Sesuaikan dengan ukuran yang Anda inginkan,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 5), // Ubah jarak antara gambar pertama dan kedua sesuai kebutuhan
-                      child: Image.asset(
+                if (currentView == 'Paket')
+                  Column(
+                    children: [
+                      SizedBox(height: 15.5),
+                      Image.asset(
                         'assets/umroh_iklan.png',
-                        width: 380, // Sesuaikan dengan ukuran yang Anda inginkan
-                        height: 220, // Sesuaikan dengan ukuran yang Anda inginkan
+                        width: 345,
+                        height: 205,
                         fit: BoxFit.fitWidth,
                       ),
-                    ),
-                    SizedBox(height: 40),
-                  ],
-                ),
-
-
-              if (currentView == 'Gambar')
-                Text(
-                  'Tampilkan Gambar di sini',
-                  style: TextStyle(fontSize: 16),
-                ),
-
-            ],
+                      Container(
+                        // margin: const EdgeInsets.only(top: 5),
+                        child: Image.asset(
+                          'assets/umroh_iklan.png',
+                          width: 345,
+                          height: 205,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                    ],
+                  ),
+                if (currentView == 'Gambar')
+                  Text(
+                    'Tampilkan Gambar di sini',
+                    style: TextStyle(fontSize: 16),
+                  ),
+              ],
+            ),
           ),
-    ),
         ],
       ),
     );
