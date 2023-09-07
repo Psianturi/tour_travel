@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:multi_image_layout/multi_image_layout.dart';
 
 class DetailTourTravel extends StatefulWidget {
   const DetailTourTravel({super.key});
@@ -257,11 +258,72 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       const SizedBox(height: 35),
                     ],
                   ),
+
                 if (currentView == 'Gambar')
-                  const Text(
-                    'Tampilkan Gambar di sini',
-                    style: TextStyle(fontSize: 16),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                            'assets/gambar/haji_photo1.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          Image.asset(
+                            'assets/gambar/haji_photo2.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          Image.asset(
+                            'assets/gambar/haji_photo3.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                            'assets/gambar/haji_photo4.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          Image.asset(
+                            'assets/gambar/haji_photo5.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          // Image.asset(
+                          //   'assets/gambar_5.png',
+                          //   width: 100,
+                          //   height: 100,
+                          //   fit: BoxFit.cover,
+                          // ),
+                        ],
+                      ),
+                    ],
                   ),
+
+
+                // if (currentView == 'Gambar')
+                //   MultiImageLayout(
+                //     images: List.generate(
+                //       6, // Number of images you want to display
+                //           (index) => MultiImageLayoutItem.asset(
+                //         'assets/gambar_$index.png', // Replace with your image paths
+                //       ),
+                //     ),
+                //     itemExtent: 200, // Adjust the item extent as needed
+                //     spacing: 8.0, // Adjust the spacing between items
+                //   ),
+
               ],
             ),
           ),
