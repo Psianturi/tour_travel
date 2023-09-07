@@ -149,7 +149,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     ),
                   ),
                 ),
-
                 if (currentView == 'Detail Info')
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,11 +175,12 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 8, left: 20, right: 20),
+                        margin:
+                            const EdgeInsets.only(top: 8, left: 20, right: 20),
                         child: const Text(
                           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                              ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
-                              'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                          ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
+                          'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black54,
@@ -201,7 +201,8 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       ),
                       const SizedBox(height: 20),
                       SizedBox(
-                        height: 50, // Sesuaikan dengan tinggi yang Anda inginkan
+                        height: 50,
+                        // Sesuaikan dengan tinggi yang Anda inginkan
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 5, // Jumlah card yang ingin ditampilkan
@@ -212,21 +213,24 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                               margin: const EdgeInsets.only(left: 20),
                               child: InkWell(
                                 onTap: () {
-
-                                 print('Card ke-$index diklik');
+                                  print('Card ke-$index diklik');
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     children: [
-                                      Icon(Icons.location_on_outlined), // Icon map
-                                      const SizedBox(width: 5), // Spasi antara ikon dan teks
+                                      Icon(Icons.location_on_outlined),
+                                      // Icon map
+                                      const SizedBox(width: 5),
+                                      // Spasi antara ikon dan teks
                                       Text(
                                         'Buka Map $index',
                                         style: TextStyle(
-                                          color: Colors.white, // Warna teks putih
+                                          color:
+                                              Colors.white, // Warna teks putih
                                         ),
-                                      ), // Teks map
+                                      ),
+                                      // Teks map
                                     ],
                                   ),
                                 ),
@@ -238,7 +242,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       const SizedBox(height: 40),
                     ],
                   ),
-
                 if (currentView == 'Paket')
                   Column(
                     children: [
@@ -263,51 +266,69 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                   Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/gambar/haji_photo1.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10, right: 10.0, top: 10.0),
+                            child: Image.asset(
+                              'assets/gambar/haji_photo1.png',
+                              width: 124,
+                              height: 124,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
-                          Image.asset(
-                            'assets/gambar/haji_photo2.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                    top: 10.0),
+                            child: Image.asset(
+                              'assets/gambar/haji_photo2.png',
+                              width: 124,
+                              height: 124,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
-                          Image.asset(
-                            'assets/gambar/haji_photo3.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10.0),
+                            child: Image.asset(
+                              'assets/gambar/haji_photo3.png',
+                              width: 124,
+                              height: 124,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/gambar/haji_photo4.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 10.0, top: 5.0),
+                            child: Image.asset(
+                              'assets/gambar/haji_photo4.png',
+                              width: 124,
+                              height: 124,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
-                          Image.asset(
-                            'assets/gambar/haji_photo5.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 5.0),
+                            child: Image.asset(
+                              'assets/gambar/haji_photo5.png',
+                              width: 124,
+                              height: 124,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
-
                         ],
                       ),
                     ],
                   ),
-
               ],
             ),
           ),
