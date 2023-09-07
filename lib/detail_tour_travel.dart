@@ -264,6 +264,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                         children: [
                           Image.asset(
                             'assets/gambar/haji_photo1.png',
@@ -285,6 +286,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -300,29 +302,11 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             height: 100,
                             fit: BoxFit.cover,
                           ),
-                          // Image.asset(
-                          //   'assets/gambar_5.png',
-                          //   width: 100,
-                          //   height: 100,
-                          //   fit: BoxFit.cover,
-                          // ),
+
                         ],
                       ),
                     ],
                   ),
-
-
-                // if (currentView == 'Gambar')
-                //   MultiImageLayout(
-                //     images: List.generate(
-                //       6, // Number of images you want to display
-                //           (index) => MultiImageLayoutItem.asset(
-                //         'assets/gambar_$index.png', // Replace with your image paths
-                //       ),
-                //     ),
-                //     itemExtent: 200, // Adjust the item extent as needed
-                //     spacing: 8.0, // Adjust the spacing between items
-                //   ),
 
               ],
             ),
