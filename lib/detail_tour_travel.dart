@@ -254,6 +254,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
