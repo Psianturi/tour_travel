@@ -10,6 +10,7 @@ class DetailTourTravel extends StatefulWidget {
 class _DetailTourTravelState extends State<DetailTourTravel> {
   String currentView = 'Detail Info';
   bool isBottomBarVisible = false;
+  IconData bottomBarIcon = Icons.keyboard_arrow_up;
 
   void changeView(String view) {
     setState(() {
@@ -318,26 +319,56 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
       bottomNavigationBar: isBottomBarVisible
           ? Container(
         color: Colors.white,
-        child: const Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 34),
-            Text(
-              'Ini adalah Bottom Bar',
-              style: TextStyle(fontSize: 18),
+            const SizedBox(height: 18), // Tinggi dari bottom bar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Info lebih lanjut, silahkan',
+                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                ),
+                const SizedBox(width: 35), // Spasi antara teks dan ikon
+                TextButton.icon(
+                  onPressed: () {
+                    // Tindakan yang ingin Anda lakukan saat tombol ditekan
+                  },
+                  icon: const Icon(
+                    Icons.place, // Ganti dengan ikon yang Anda inginkan
+                    color: Colors.white, // Warna ikon tetap putih
+                  ),
+                  label: const Text(
+                    'Buka Map',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white, // Mengatur warna teks menjadi putih
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blueAccent), // Mengatur warna latar belakang tombol menjadi biru
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 20),
             // Tempatkan konten bottom bar Anda di sini
             // Contoh: ListView.builder, Column, Row, dll.
           ],
         ),
       )
           : null,
+
       floatingActionButton: FloatingActionButton(
+        mini: true,
+        backgroundColor: isBottomBarVisible ? Colors.transparent : Colors.blue[50],
         onPressed: () {
           _toggleBottomBar();
         },
-        child: Icon(Icons.arrow_upward),
+        child: Icon(
+          bottomBarIcon,
+            color: isBottomBarVisible ? Colors.white : Colors.black),
       ),
     );
   }
@@ -345,6 +376,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
   void _toggleBottomBar() {
     setState(() {
       isBottomBarVisible = !isBottomBarVisible;
+      bottomBarIcon = isBottomBarVisible ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up;
     });
   }
 }
