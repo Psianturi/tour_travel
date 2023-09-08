@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:multi_image_layout/multi_image_layout.dart';
 
 class DetailTourTravel extends StatefulWidget {
   const DetailTourTravel({super.key});
@@ -10,6 +9,7 @@ class DetailTourTravel extends StatefulWidget {
 
 class _DetailTourTravelState extends State<DetailTourTravel> {
   String currentView = 'Detail Info';
+  bool isBottomBarVisible = false;
 
   void changeView(String view) {
     setState(() {
@@ -41,20 +41,14 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
         ),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        // actions: [
-        //
-        // ],
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(24),
           ),
         ),
       ),
-      //insert image
       body: Stack(
-        // Menggunakan Stack untuk latar belakang dan konten
         children: [
-          // Latar belakang gambar
           Positioned.fill(
             child: Image.asset(
               'assets/bg.png',
@@ -66,7 +60,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  // Menengahkan elemen-elemen ke atas tengah
                   child: Container(
                     margin: const EdgeInsets.only(top: 14),
                     padding: const EdgeInsets.all(4.4),
@@ -81,7 +74,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 13.5),
-                  // Ubah ukuran
                   margin: const EdgeInsets.only(top: 12),
                   child: Card(
                     color: Colors.white,
@@ -176,11 +168,11 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       ),
                       Container(
                         margin:
-                            const EdgeInsets.only(top: 8, left: 20, right: 20),
+                        const EdgeInsets.only(top: 8, left: 20, right: 20),
                         child: const Text(
                           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                          ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
-                          'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                              ' Lorem Ipsum has been the industry standard dummy text ever since the 1500s,'
+                              'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black54,
@@ -202,10 +194,9 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       const SizedBox(height: 20),
                       SizedBox(
                         height: 50,
-                        // Sesuaikan dengan tinggi yang Anda inginkan
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5, // Jumlah card yang ingin ditampilkan
+                          itemCount: 5,
                           itemBuilder: (context, index) {
                             return Card(
                               color: Colors.blue,
@@ -220,17 +211,13 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                                   child: Row(
                                     children: [
                                       Icon(Icons.location_on_outlined),
-                                      // Icon map
                                       const SizedBox(width: 5),
-                                      // Spasi antara ikon dan teks
                                       Text(
                                         'Buka Map $index',
                                         style: TextStyle(
-                                          color:
-                                              Colors.white, // Warna teks putih
+                                          color: Colors.white,
                                         ),
                                       ),
-                                      // Teks map
                                     ],
                                   ),
                                 ),
@@ -261,12 +248,10 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       const SizedBox(height: 35),
                     ],
                   ),
-
                 if (currentView == 'Gambar')
                   Column(
                     children: [
                       Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
@@ -280,8 +265,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                    top: 10.0),
+                            padding: const EdgeInsets.only(top: 10.0),
                             child: Image.asset(
                               'assets/gambar/haji_photo2.png',
                               width: 124,
@@ -290,8 +274,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10.0),
+                            padding: const EdgeInsets.only(top: 10.0),
                             child: Image.asset(
                               'assets/gambar/haji_photo3.png',
                               width: 124,
@@ -303,7 +286,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
@@ -316,8 +298,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 5.0),
+                            padding: const EdgeInsets.only(top: 5.0),
                             child: Image.asset(
                               'assets/gambar/haji_photo5.png',
                               width: 124,
@@ -334,6 +315,36 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
           ),
         ],
       ),
+      bottomNavigationBar: isBottomBarVisible
+          ? Container(
+        color: Colors.white,
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 34),
+            Text(
+              'Ini adalah Bottom Bar',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            // Tempatkan konten bottom bar Anda di sini
+            // Contoh: ListView.builder, Column, Row, dll.
+          ],
+        ),
+      )
+          : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _toggleBottomBar();
+        },
+        child: Icon(Icons.arrow_upward),
+      ),
     );
+  }
+
+  void _toggleBottomBar() {
+    setState(() {
+      isBottomBarVisible = !isBottomBarVisible;
+    });
   }
 }
