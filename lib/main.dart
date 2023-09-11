@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:getwidget/getwidget.dart';
@@ -170,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: TextStyle(color: Colors.lightBlueAccent),),
 
                         // description: Text('$description'),
-                        description: Text('$truncatedDescription'),
+                        description: Text(truncatedDescription),
                           icon: Image.asset(
                             'assets/map_ic.png',
                             width: 75,
