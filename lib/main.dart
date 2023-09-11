@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:tour_travel/api/tour_travel_api.dart';
 import 'package:tour_travel/detail_tour_travel.dart';
+import 'package:tour_travel/models/tour_travel_model.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +39,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late TourTravelModel tourTravelModel = TourTravelModel();
+
+  Future<void> fetchData() async {
+
+    var url = Uri.parse(TourTravelApi.baseUrl +
+        TourTravelApi.getList );
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer $bearerToken'
+    });
+    print('Response Status: ${response.statusCode}');
+    print('Response Body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+
+      if  ( responseData.containsKey('data')) {
+        tourTravelModel = TourTravelModel.fromJson(responseData); // Update HistoryResponse here
+        setState(() {});
+      }
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,22 +114,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AnimationLimiter(
           child: ListView.builder(
             padding: const EdgeInsets.all(8),
-            // itemCount: historyResponse.data?.length ?? 0,
+            itemCount: tourTravelModel.data?.length ?? 0,
             itemBuilder: (context, index) {
-              // final Data? historyData = historyResponse.data?[index];
-              //
-              // if (historyData == null) return const SizedBox.shrink();
-              //
-              // final String? trNumber = historyData.trNumber;
-              // final String? status = historyData.transaction?.status;
-              // final String? sendAt = historyData.transaction?.sendAt;
-              // final String? receiveAt = historyData.transaction?.receiveAt;
-              // final String? productName = historyData.transaction?.product?.name;
-              // final int? quantity = historyData.transaction?.quantity;
+              final Data? tourTravelData = tourTravelModel.data?[index];
+              if (tourTravelData == null) {
+                // return const SizedBox.shrink();
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+               // return const SizedBox(
+               //    height: 20,
+               //  );
+              }
+              final String? title = tourTravelData.title;
+              final int? rating = tourTravelData.rating;
+              final String? description = tourTravelData.description;
+              final String? image = tourTravelData.image;
 
-              const SizedBox(
-                height: 10,
-              );
               return AnimationConfiguration.staggeredList(
                 position: index,
                 duration: const Duration(milliseconds: 370),
@@ -108,35 +145,22 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       shadowColor: Colors.greenAccent,
+
                       child: GFListTile(
                         //input implementasi api disini ----------------
-                        avatar: Image.asset(
-                          'assets/avatar.png',
+                        avatar: Image.network( '$image',
                           width: 82,
                           height: 85,
                         ),
-                        titleText: 'Tour Hajj Indo',
-                        subTitle: const Text('Haji', style: TextStyle(color: Colors.lightBlueAccent),),
-                        // subTitle: Row(
-                        //   children: [
-                        //     Text('${index + 1}'),
-                        //     Row(
-                        //       children: List.generate(5, (i) {
-                        //         return Icon(
-                        //           i < (index + 1)
-                        //               ? Icons.star
-                        //               : Icons.star_border,
-                        //           color: Colors.orangeAccent,
-                        //         );
-                        //       }),
-                        //     ),
-                        //   ],
-                        // ),
-                        description: const Text('Lorem Ipsum bla bla . .'),
+                        titleText: '$title',
+                        subTitle:  Text('$rating',
+                          style: TextStyle(color: Colors.lightBlueAccent),),
+
+                        description: Text('$description'),
                         icon: Image.asset(
                           'assets/map_ic.png', // Ganti dengan path ke gambar ikon favorit di asset Anda
-                          width: 80,
-                          height: 85,
+                          width: 75,
+                          height: 80,
                           fit: BoxFit.cover, // Sesuaikan dengan kebutuhan Anda
                         ),
 
