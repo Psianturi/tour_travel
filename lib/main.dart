@@ -131,6 +131,13 @@ class _MyHomePageState extends State<MyHomePage> {
               final String? description = tourTravelData.description;
               final String? image = tourTravelData.image;
 
+              final int maxDescriptionLength = 100;
+              String truncatedDescription = description ?? '';
+
+              if (description != null && description.length > maxDescriptionLength) {
+                truncatedDescription = description.substring(0, maxDescriptionLength) + '...';
+              }
+
               return AnimationConfiguration.staggeredList(
                 position: index,
                 duration: const Duration(milliseconds: 370),
@@ -147,22 +154,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       shadowColor: Colors.greenAccent,
 
                       child: GFListTile(
-                        //input implementasi api disini ----------------
-                        avatar: Image.network( '$image',
-                          width: 82,
-                          height: 85,
+                        // avatar: Image.network( '$image',
+                        //   width: 30,
+                        //   height: 30,
+                        //   fit: BoxFit.cover,
+                        // ),
+                        avatar: Image.asset(
+                          'assets/avatar.png',
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.cover,
                         ),
                         titleText: '$title',
                         subTitle:  Text('$rating',
                           style: TextStyle(color: Colors.lightBlueAccent),),
 
-                        description: Text('$description'),
-                        icon: Image.asset(
-                          'assets/map_ic.png', // Ganti dengan path ke gambar ikon favorit di asset Anda
-                          width: 75,
-                          height: 80,
-                          fit: BoxFit.cover, // Sesuaikan dengan kebutuhan Anda
-                        ),
+                        // description: Text('$description'),
+                        description: Text('$truncatedDescription'),
+                          icon: Image.asset(
+                            'assets/map_ic.png',
+                            width: 75,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
 
                         onTap: () {
                           Navigator.push(
