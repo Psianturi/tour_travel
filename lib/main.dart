@@ -39,23 +39,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late TourTravelModel tourTravelModel = TourTravelModel();
+  late List<Package> packages = [];
 
   Future<void> fetchData() async {
-
-    var url = Uri.parse(TourTravelApi.baseUrl +
-        TourTravelApi.getList );
+    var url = Uri.parse(TourTravelApi.baseUrl + TourTravelApi.getList);
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       // 'Authorization': 'Bearer $bearerToken'
     });
-    print('Response Status: ${response.statusCode}');
-    print('Response Body: ${response.body}');
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
-      if  ( responseData.containsKey('data')) {
-        tourTravelModel = TourTravelModel.fromJson(responseData); // Update HistoryResponse here
+      if (responseData.containsKey('data')) {
+        tourTravelModel = TourTravelModel.fromJson(responseData);
         setState(() {});
       }
     } else {
@@ -63,10 +60,38 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<List<Package>> fetchPackages() async {
+    var url = Uri.parse(TourTravelApi.baseUrl + TourTravelApi.getList);
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer $bearerToken'
+    });
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+
+      if (responseData.containsKey('data')) {
+        final List<dynamic> packageDataList = responseData['data'];
+        final List<Package> packages = packageDataList.map((data) {
+          return Package.fromJson(data);
+        }).toList();
+        return packages;
+      }
+    }
+
+    throw Exception('Failed to load packages');
+  }
+
+
   @override
   void initState() {
     super.initState();
     fetchData();
+    fetchPackages().then((packageList) {
+      setState(() {
+        packages = packageList;
+      });
+    });
   }
 
   @override
@@ -182,7 +207,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailTourTravel(
-                                tourTravelData: tourTravelData, // Pass the selected data
+                                tourTravelData: tourTravelData,
+                                packages: packages,
                               ),
                             ),
                           );
