@@ -179,10 +179,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DetailTourTravel()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailTourTravel(
+                                tourTravelData: tourTravelData, // Pass the selected data
+                              ),
+                            ),
+                          );
                         },
+
                       ),
                     ),
                   ),

@@ -1,13 +1,15 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'api/tour_travel_api.dart';
-import 'models/detail_tour_travel_model.dart';
+import 'models/tour_travel_model.dart';
+
+
 
 class DetailTourTravel extends StatefulWidget {
-  const DetailTourTravel({super.key});
+  final Data? tourTravelData;
+
+  const DetailTourTravel({Key? key, required this.tourTravelData})
+      : super(key: key);
 
   @override
   _DetailTourTravelState createState() => _DetailTourTravelState();
@@ -18,44 +20,12 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
   bool isBottomBarVisible = false;
   IconData bottomBarIcon = Icons.keyboard_arrow_up;
 
-  late int loggedInUserId;
-  late DetailModel detailModel = DetailModel();
 
-  void loadUserId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      loggedInUserId = prefs.getInt('id') ?? 0; // Gunakan default value jika tidak ditemukan
-    });
-    fetchDetailData(loggedInUserId);
-  }
 
   @override
   void initState() {
     super.initState();
-    loadUserId();
-  }
 
-  Future<void> fetchDetailData(id) async {
-
-    var url = Uri.parse(TourTravelApi.baseUrl +
-        TourTravelApi.getDetail + id.toString() );
-    final response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer $bearerToken'
-    });
-    print('Response Status: ${response.statusCode}');
-    print('Response Body: ${response.body}');
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-
-      if  ( responseData.containsKey('data')) {
-        detailModel = DetailModel.fromJson(responseData); // Update HistoryResponse here
-        setState(() {});
-      }
-    } else {
-      throw Exception('Failed to load data');
-    }
   }
 
   void changeView(String view) {
@@ -194,9 +164,8 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 15, left: 20),
-                        child: const Text(
-                          'Tour Hajj Indo',
-                          style: TextStyle(
+                        child:  Text(widget.tourTravelData?.title ?? '',
+                          style: const TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.bold,
                             color: Colors.blueAccent,
