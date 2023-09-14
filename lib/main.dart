@@ -178,17 +178,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       shadowColor: Colors.greenAccent,
 
                       child: GFListTile(
-                        // avatar: Image.network( '$image',
-                        //   width: 30,
-                        //   height: 30,
+                        avatar: ClipOval(
+                          child: Image.network(
+                            '${TourTravelApi.imageUrl}$image',
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        // avatar: Image.asset(
+                        //   'assets/avatar.png',
+                        //   width: 70,
+                        //   height: 70,
                         //   fit: BoxFit.cover,
                         // ),
-                        avatar: Image.asset(
-                          'assets/avatar.png',
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        ),
                         titleText: '$title',
                         subTitle:  Text('$rating',
                           style: TextStyle(color: Colors.lightBlueAccent),),

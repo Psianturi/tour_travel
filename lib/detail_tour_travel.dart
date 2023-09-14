@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:tour_travel/api/tour_travel_api.dart';
 import 'models/tour_travel_model.dart';
 
 class DetailTourTravel extends StatefulWidget {
@@ -21,6 +22,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
   String currentView = 'Detail Info';
   bool isBottomBarVisible = false;
   IconData bottomBarIcon = Icons.keyboard_arrow_up;
+
 
   @override
   void initState() {
@@ -260,7 +262,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           crossAxisAlignment: CrossAxisAlignment.start, // Menyusun elemen dalam kolom
                           children: [
                             Image.network(
-                              package.image ?? '', // Gambar paket dari URL (pastikan URL-nya benar)
+                              TourTravelApi.imageUrl + (package.image ?? ''), // Gambar paket dari URL (pastikan URL-nya benar)
                               width: double.infinity, // Lebar gambar mengisi card
                               height: 200, // Tinggi gambar
                               fit: BoxFit.cover, // Menyesuaikan gambar dengan card
