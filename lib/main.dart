@@ -40,6 +40,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late TourTravelModel tourTravelModel = TourTravelModel();
   late List<Package> packages = [];
+  late List<Media> media = [];
 
   Future<void> fetchData() async {
     var url = Uri.parse(TourTravelApi.baseUrl + TourTravelApi.getList);
@@ -82,6 +83,28 @@ class _MyHomePageState extends State<MyHomePage> {
     throw Exception('Failed to load packages');
   }
 
+  Future<List<Media>> fetchMedia() async {
+    var url = Uri.parse(TourTravelApi.baseUrl + TourTravelApi.getList);
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer $bearerToken'
+    });
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+
+      if (responseData.containsKey('data')) {
+        final List<dynamic> mediaDataList = responseData['data'];
+        final List<Media> media = mediaDataList.map((data) {
+          return Media.fromJson(data);
+        }).toList();
+        return media;
+      }
+    }
+
+    throw Exception('Failed to load media');
+  }
+
 
   @override
   void initState() {
@@ -92,7 +115,14 @@ class _MyHomePageState extends State<MyHomePage> {
         packages = packageList;
       });
     });
+
+    fetchMedia().then((mediaList) {
+      setState(() {
+        media = mediaList;
+      });
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -212,6 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => DetailTourTravel(
                                 tourTravelData: tourTravelData,
                                 packages: packages,
+                                media: media
                               ),
                             ),
                           );

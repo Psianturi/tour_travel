@@ -7,10 +7,12 @@ import 'models/tour_travel_model.dart';
 class DetailTourTravel extends StatefulWidget {
   final Data? tourTravelData;
   final List<Package>? packages;
+  final List<Media>? media;
 
   const DetailTourTravel({Key? key,
     required this.tourTravelData,
     required this.packages,
+    required this.media
   })
       : super(key: key);
 
@@ -249,7 +251,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                   ),
 
                 if (currentView == 'Paket')
-
                   Column(
                     children: widget.packages?.map((package) {
                       return Card(
@@ -303,89 +304,97 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     }).toList() ?? [], // Handle null or empty list
                   ),
 
-                // if (currentView == 'Paket')
-                //   Column(
-                //     children: [
-                //       const SizedBox(height: 15.5),
-                //       Image.asset(
-                //         'assets/umroh_iklan.png',
-                //         width: 345,
-                //         height: 205,
-                //         fit: BoxFit.fitWidth,
-                //       ),
-                //       Image.asset(
-                //         'assets/umroh_iklan.png',
-                //         width: 345,
-                //         height: 205,
-                //         fit: BoxFit.fitWidth,
-                //       ),
-                //       const SizedBox(height: 35),
-                //     ],
-                //   ),
-
                 if (currentView == 'Gambar')
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10.0, top: 10.0),
-                            child: Image.asset(
-                              'assets/gambar/haji_photo1.png',
-                              width: 124,
-                              height: 124,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Image.asset(
-                              'assets/gambar/haji_photo2.png',
-                              width: 124,
-                              height: 124,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Image.asset(
-                              'assets/gambar/haji_photo3.png',
-                              width: 124,
-                              height: 124,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 10.0, top: 5.0),
-                            child: Image.asset(
-                              'assets/gambar/haji_photo4.png',
-                              width: 124,
-                              height: 124,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Image.asset(
-                              'assets/gambar/haji_photo5.png',
-                              width: 124,
-                              height: 124,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 250, // Sesuaikan tinggi dengan kebutuhan Anda
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: widget.media?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            final media = widget.media?[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.network(
+                                '${TourTravelApi.imageUrl}${media?.image ?? ''}',
+                                width: 200, // Sesuaikan lebar gambar dengan kebutuhan Anda
+                                height: 200, // Sesuaikan tinggi gambar dengan kebutuhan Anda
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
+
+
+
+                // if (currentView == 'Gambar')
+                //   Column(
+                //     children: [
+                //       Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         crossAxisAlignment: CrossAxisAlignment.center,
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(
+                //                 left: 10, right: 10.0, top: 10.0),
+                //             child: Image.asset(
+                //               'assets/gambar/haji_photo1.png',
+                //               width: 124,
+                //               height: 124,
+                //               fit: BoxFit.fitWidth,
+                //             ),
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 10.0),
+                //             child: Image.asset(
+                //               'assets/gambar/haji_photo2.png',
+                //               width: 124,
+                //               height: 124,
+                //               fit: BoxFit.fitWidth,
+                //             ),
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 10.0),
+                //             child: Image.asset(
+                //               'assets/gambar/haji_photo3.png',
+                //               width: 124,
+                //               height: 124,
+                //               fit: BoxFit.fitWidth,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Row(
+                //         crossAxisAlignment: CrossAxisAlignment.center,
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(
+                //                 left: 20, right: 10.0, top: 5.0),
+                //             child: Image.asset(
+                //               'assets/gambar/haji_photo4.png',
+                //               width: 124,
+                //               height: 124,
+                //               fit: BoxFit.fitWidth,
+                //             ),
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 5.0),
+                //             child: Image.asset(
+                //               'assets/gambar/haji_photo5.png',
+                //               width: 124,
+                //               height: 124,
+                //               fit: BoxFit.fitWidth,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ],
+                //   ),
+
               ],
             ),
           ),
