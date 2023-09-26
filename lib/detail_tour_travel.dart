@@ -120,8 +120,8 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           ),
                         ),
                         const VerticalDivider(
-                          color: Colors.white,
-                          thickness: 1,
+                          color: Colors.black,
+                          thickness: 5,
                         ),
                         Expanded(
                           child: GestureDetector(
@@ -211,17 +211,18 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: 50,
+                      const SizedBox(height: 40),
+                      Container(
+                        height: 52,
+                        margin: const EdgeInsets.only(top: 10, bottom: 10),
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 5,
                           itemBuilder: (context, index) {
                             return Card(
                               color: Colors.blue,
-                              elevation: 15,
-                              margin: const EdgeInsets.only(left: 20),
+                              elevation: 10,
+                              margin: const EdgeInsets.only(left: 20, bottom: 0),
                               child: InkWell(
                                 onTap: () {
                                   print('Card ke-$index diklik');
@@ -230,11 +231,11 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     children: [
-                                      Icon(Icons.location_on_outlined),
+                                      const Icon(Icons.location_on_outlined),
                                       const SizedBox(width: 5),
                                       Text(
                                         'Buka Map $index',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                         ),
                                       ),
@@ -246,7 +247,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 2),
                     ],
                   ),
 
@@ -400,61 +401,48 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
           ),
         ],
       ),
-      bottomNavigationBar: isBottomBarVisible
-          ? Container(
-              color: Colors.white,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 18), // Tinggi dari bottom bar
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Info lebih lanjut, silahkan',
-                        style:
-                            TextStyle(fontSize: 14, color: Colors.blueAccent),
-                      ),
-                      const SizedBox(width: 35), // Spasi antara teks dan ikon
-                      TextButton.icon(
-                        onPressed: () {
-                          // Tindakan yang ingin Anda lakukan saat tombol ditekan
-                        },
-                        icon: const Icon(
-                          Icons.place, // Ganti dengan ikon yang Anda inginkan
-                          color: Colors.white, // Warna ikon tetap putih
-                        ),
-                        label: const Text(
-                          'Buka Map',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors
-                                .white, // Mengatur warna teks menjadi putih
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors
-                              .blueAccent), // Mengatur warna latar belakang tombol menjadi biru
-                        ),
-                      ),
-                    ],
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 18), // Tinggi dari bottom bar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Info lebih lanjut, silahkan',
+                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+                ),
+                const SizedBox(width: 35), // Spasi antara teks dan ikon
+                TextButton.icon(
+                  onPressed: () {
+                    // Tindakan yang ingin Anda lakukan saat tombol ditekan
+                  },
+                  icon: const Icon(
+                    Icons.place, // Ganti dengan ikon yang Anda inginkan
+                    color: Colors.white, // Warna ikon tetap putih
                   ),
-                  const SizedBox(height: 20),
-                  // Tempatkan konten bottom bar Anda di sini
-                  // Contoh: ListView.builder, Column, Row, dll.
-                ],
-              ),
-            )
-          : null,
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        backgroundColor:
-            isBottomBarVisible ? Colors.transparent : Colors.blue[50],
-        onPressed: () {
-          _toggleBottomBar();
-        },
-        child: Icon(bottomBarIcon,
-            color: isBottomBarVisible ? Colors.white : Colors.black),
+                  label: const Text(
+                    'Buka Map',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white, // Mengatur warna teks menjadi putih
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.blueAccent),
+                    // Mengatur warna latar belakang tombol menjadi biru
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            // Tempatkan konten bottom bar Anda di sini
+            // Contoh: ListView.builder, Column, Row, dll.
+          ],
+        ),
       ),
     );
   }
