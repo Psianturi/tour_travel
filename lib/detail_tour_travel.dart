@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tour_travel/api/tour_travel_api.dart';
@@ -9,11 +8,11 @@ class DetailTourTravel extends StatefulWidget {
   final List<Package>? packages;
   final List<Media>? media;
 
-  const DetailTourTravel({Key? key,
-    required this.tourTravelData,
-    required this.packages,
-    required this.media
-  })
+  const DetailTourTravel(
+      {Key? key,
+      required this.tourTravelData,
+      required this.packages,
+      required this.media})
       : super(key: key);
 
   @override
@@ -25,7 +24,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
   bool isBottomBarVisible = false;
   IconData bottomBarIcon = Icons.keyboard_arrow_up;
 
-
   @override
   void initState() {
     super.initState();
@@ -36,7 +34,6 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
       currentView = view;
     });
     print('Current View: $currentView');
-
   }
 
   @override
@@ -193,7 +190,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             const EdgeInsets.only(top: 8, left: 20, right: 20),
                         child: Text(
                           widget.tourTravelData?.description ?? '',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             color: Colors.black54,
                           ),
@@ -222,7 +219,8 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                             return Card(
                               color: Colors.blue,
                               elevation: 10,
-                              margin: const EdgeInsets.only(left: 20, bottom: 0),
+                              margin:
+                                  const EdgeInsets.only(left: 20, bottom: 0),
                               child: InkWell(
                                 onTap: () {
                                   print('Card ke-$index diklik');
@@ -254,74 +252,90 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                 if (currentView == 'Paket')
                   Column(
                     children: widget.packages?.map((package) {
-                      return Card(
-                        elevation: 2.0, // Tingkat elevasi bayangan card
-                        margin: const EdgeInsets.all(10.0), // Jarak antara card dengan elemen lain
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0), // Bentuk card
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start, // Menyusun elemen dalam kolom
-                          children: [
-                            Image.network(
-                              TourTravelApi.imageUrl + (package.image ?? ''), // Gambar paket dari URL (pastikan URL-nya benar)
-                              width: double.infinity, // Lebar gambar mengisi card
-                              height: 200, // Tinggi gambar
-                              fit: BoxFit.cover, // Menyesuaikan gambar dengan card
+                          return Card(
+                            elevation: 3.5,
+                            // Tingkat elevasi bayangan card
+                            margin: const EdgeInsets.all(15.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(14.0), // Bentuk card
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0), // Padding dalam card
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start, // Menyusun teks ke kiri
-                                children: [
-                                  Text(
-                                    package.title ?? '', // Judul paket
-                                    style: const TextStyle(
-                                      fontSize: 20.0, // Ukuran teks judul
-                                      fontWeight: FontWeight.bold, // Ketebalan teks judul
-                                    ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // Menyusun elemen dalam kolom
+                              children: [
+                                SizedBox(height: 8,),
+                                Center(
+                                child: Image.network(
+                                  TourTravelApi.imageUrl +
+                                      (package.image ?? ''),
+                                  width: double.infinity,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  // Padding dalam card
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    // Menyusun teks ke kiri
+                                    children: [
+                                      Text(
+                                        package.title ?? '',
+                                        style: const TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      // Spasi antara judul dan deskripsi
+                                      Text(
+                                        package.description ?? '',
+                                        // Deskripsi paket
+                                        style: TextStyle(
+                                            fontSize:
+                                                16.0), // Ukuran teks deskripsi
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      // Spasi antara deskripsi dan harga
+                                      Text(
+                                        'Harga: ${package.harga ?? 0}',
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Colors.blue, // Warna teks harga
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 8.0), // Spasi antara judul dan deskripsi
-                                  Text(
-                                    package.description ?? '', // Deskripsi paket
-                                    style: TextStyle(fontSize: 16.0), // Ukuran teks deskripsi
-                                  ),
-                                  const SizedBox(height: 8.0), // Spasi antara deskripsi dan harga
-                                  Text(
-                                    'Harga: ${package.harga ?? 0}', // Harga paket
-                                    style: const TextStyle(
-                                      fontSize: 18.0, // Ukuran teks harga
-                                      fontWeight: FontWeight.bold, // Ketebalan teks harga
-                                      color: Colors.blue, // Warna teks harga
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-
-                    }).toList() ?? [], // Handle null or empty list
+                          );
+                        }).toList() ??
+                        [], // Handle null or empty list
                   ),
 
                 if (currentView == 'Gambar')
                   Column(
                     children: [
                       SizedBox(
-                        height: 250, // Sesuaikan tinggi dengan kebutuhan Anda
+                        height: 200, // Sesuaikan tinggi dengan kebutuhan Anda
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: widget.media?.length ?? 0,
                           itemBuilder: (context, index) {
                             final media = widget.media?[index];
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(7.0),
                               child: Image.network(
                                 '${TourTravelApi.imageUrl}${media?.image ?? ''}',
-                                width: 200, // Sesuaikan lebar gambar dengan kebutuhan Anda
-                                height: 200, // Sesuaikan tinggi gambar dengan kebutuhan Anda
-                                fit: BoxFit.cover,
+                                width: 210,
+                                height: 190,
+
                               ),
                             );
                           },
@@ -329,84 +343,18 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                       ),
                     ],
                   ),
-
-
-
-                // if (currentView == 'Gambar')
-                //   Column(
-                //     children: [
-                //       Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Padding(
-                //             padding: const EdgeInsets.only(
-                //                 left: 10, right: 10.0, top: 10.0),
-                //             child: Image.asset(
-                //               'assets/gambar/haji_photo1.png',
-                //               width: 124,
-                //               height: 124,
-                //               fit: BoxFit.fitWidth,
-                //             ),
-                //           ),
-                //           Padding(
-                //             padding: const EdgeInsets.only(top: 10.0),
-                //             child: Image.asset(
-                //               'assets/gambar/haji_photo2.png',
-                //               width: 124,
-                //               height: 124,
-                //               fit: BoxFit.fitWidth,
-                //             ),
-                //           ),
-                //           Padding(
-                //             padding: const EdgeInsets.only(top: 10.0),
-                //             child: Image.asset(
-                //               'assets/gambar/haji_photo3.png',
-                //               width: 124,
-                //               height: 124,
-                //               fit: BoxFit.fitWidth,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                //           Padding(
-                //             padding: const EdgeInsets.only(
-                //                 left: 20, right: 10.0, top: 5.0),
-                //             child: Image.asset(
-                //               'assets/gambar/haji_photo4.png',
-                //               width: 124,
-                //               height: 124,
-                //               fit: BoxFit.fitWidth,
-                //             ),
-                //           ),
-                //           Padding(
-                //             padding: const EdgeInsets.only(top: 5.0),
-                //             child: Image.asset(
-                //               'assets/gambar/haji_photo5.png',
-                //               width: 124,
-                //               height: 124,
-                //               fit: BoxFit.fitWidth,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-
               ],
             ),
           ),
         ],
       ),
+
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 18), // Tinggi dari bottom bar
+            const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -420,20 +368,19 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                     // Tindakan yang ingin Anda lakukan saat tombol ditekan
                   },
                   icon: const Icon(
-                    Icons.place, // Ganti dengan ikon yang Anda inginkan
-                    color: Colors.white, // Warna ikon tetap putih
+                    Icons.place,
+                    color: Colors.white,
                   ),
                   label: const Text(
                     'Buka Map',
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.white, // Mengatur warna teks menjadi putih
+                      color: Colors.white,
                     ),
                   ),
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.blueAccent),
-                    // Mengatur warna latar belakang tombol menjadi biru
+                        MaterialStateProperty.all<Color>(Colors.blueAccent),
                   ),
                 ),
               ],
@@ -446,13 +393,73 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
       ),
     );
   }
-
-  void _toggleBottomBar() {
-    setState(() {
-      isBottomBarVisible = !isBottomBarVisible;
-      bottomBarIcon = isBottomBarVisible
-          ? Icons.keyboard_arrow_down
-          : Icons.keyboard_arrow_up;
-    });
-  }
 }
+
+//       bottomNavigationBar: isBottomBarVisible
+//           ? Container(
+//               color: Colors.white,
+//               child: Column(
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: [
+//                   const SizedBox(height: 18), // Tinggi dari bottom bar
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       const Text(
+//                         'Info lebih lanjut, silahkan',
+//                         style:
+//                             TextStyle(fontSize: 14, color: Colors.blueAccent),
+//                       ),
+//                       const SizedBox(width: 35), // Spasi antara teks dan ikon
+//                       TextButton.icon(
+//                         onPressed: () {
+//                           // Tindakan yang ingin Anda lakukan saat tombol ditekan
+//                         },
+//                         icon: const Icon(
+//                           Icons.place, // Ganti dengan ikon yang Anda inginkan
+//                           color: Colors.white, // Warna ikon tetap putih
+//                         ),
+//                         label: const Text(
+//                           'Buka Map',
+//                           style: TextStyle(
+//                             fontSize: 13,
+//                             color: Colors
+//                                 .white, // Mengatur warna teks menjadi putih
+//                           ),
+//                         ),
+//                         style: ButtonStyle(
+//                           backgroundColor: MaterialStateProperty.all<Color>(Colors
+//                               .blueAccent), // Mengatur warna latar belakang tombol menjadi biru
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                   const SizedBox(height: 20),
+//                   // Tempatkan konten bottom bar Anda di sini
+//                   // Contoh: ListView.builder, Column, Row, dll.
+//                 ],
+//               ),
+//             )
+//           : null,
+//       floatingActionButton: FloatingActionButton(
+//         mini: true,
+//         backgroundColor:
+//             isBottomBarVisible ? Colors.transparent : Colors.blue[50],
+//         onPressed: () {
+//           _toggleBottomBar();
+//         },
+//         child: Icon(bottomBarIcon,
+//             color: isBottomBarVisible ? Colors.white : Colors.black),
+//       ),
+//     );
+//   }
+//
+//   void _toggleBottomBar() {
+//     setState(() {
+//       isBottomBarVisible = !isBottomBarVisible;
+//       bottomBarIcon = isBottomBarVisible
+//           ? Icons.keyboard_arrow_down
+//           : Icons.keyboard_arrow_up;
+//     });
+//   }
+// }

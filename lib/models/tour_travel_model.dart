@@ -7,7 +7,7 @@ class TourTravelModel {
   TourTravelModel({this.meta, this.pagination, this.data});
 
   TourTravelModel.fromJson(Map<String, dynamic> json) {
-    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
     // if (json['pagination'] != null) {
     //   pagination = <Null>[];
     //   json['pagination'].forEach((v) {
@@ -17,13 +17,13 @@ class TourTravelModel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.meta != null) {
       data['meta'] = this.meta!.toJson();
     }
@@ -53,7 +53,7 @@ class Meta {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['code'] = this.code;
     data['status'] = this.status;
     data['message'] = this.message;
@@ -99,13 +99,13 @@ class Data {
     if (json['package'] != null) {
       package = <Package>[];
       json['package'].forEach((v) {
-        package!.add(new Package.fromJson(v));
+        package!.add(Package.fromJson(v));
       });
     }
     if (json['media'] != null) {
       media = <Media>[];
       json['media'].forEach((v) {
-        media!.add(new Media.fromJson(v));
+        media!.add(Media.fromJson(v));
       });
     }
     createdAt = json['created_at'];
@@ -113,7 +113,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
     data['description'] = this.description;
@@ -174,7 +174,7 @@ class Package {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['id_tour'] = this.idTour;
     data['title'] = this.title;
@@ -208,7 +208,7 @@ class Media {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['id_tour'] = this.idTour;
     data['image'] = this.image;

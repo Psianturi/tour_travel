@@ -162,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
           image: DecorationImage(
             image: AssetImage('assets/bg.png'),
             // Ganti dengan path gambar latar belakang Anda
-            fit: BoxFit.cover, // Sesuaikan dengan kebutuhan Anda
+            fit: BoxFit.cover,
           ),
         ),
         child: AnimationLimiter(
@@ -253,7 +253,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               );
-
             },
           ),
         ),
