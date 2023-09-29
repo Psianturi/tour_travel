@@ -255,7 +255,7 @@ class _DetailTourTravelState extends State<DetailTourTravel> {
                           return Card(
                             elevation: 3.5,
                             // Tingkat elevasi bayangan card
-                            margin: const EdgeInsets.all(15.0),
+                            margin: const EdgeInsets.all(13.5),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(14.0), // Bentuk card
